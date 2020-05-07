@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <random>
+#include <set>
 #include <stdexcept>
 #include <vector>
 
@@ -25,6 +26,7 @@ public:
 	MapConfig(const MapConfig& target) = delete;
 	friend class Game;
 	void setBug(Bug* bug, const int x, const int y);
+	void removeBug(const int x, const int y);
 	Bug* getBug(const int x, const int y) const;
 	void addBug(Bug* bug);
 	static void createInstance(const int line, const int col);
@@ -39,6 +41,7 @@ class Game {
 private:
 	static Game* instance;
 	MapConfig* map;
+	std::set<Bug*> visitSet;
 
 	Game();
 	~Game();
@@ -64,12 +67,19 @@ public:
 	static const int DIRECTION_RIGHT = 3;
 
 	Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0);
+	virtual ~Bug();
 
 	virtual void breed() = 0;
 	virtual void onLifeCycleChanged() = 0;
 	virtual void onMove(int newX, int newY, int oldX, int oldY) = 0;
 	virtual void doEventLoop(char type) = 0;
 	virtual char getDescriptionChar() const = 0;
+
+	int getX() const;
+	int getY() const;
+
+	void setX(const int x);
+	void setY(const int y);
 
 	void move(int x, int y);
 	void addLifeCycle();
@@ -89,5 +99,24 @@ public:
 
 	void randomMove();
 
-	static void addAnt();
+	static void addAnt(int x = -1, int y = -1);
+};
+
+class Doodlebug : public Bug {
+private:
+	bool isLastBreedSuccess = true;
+	void breedImpl(int x, int y);
+	void killAntImpl(int x, int y);
+	
+public:
+	Doodlebug(const int x = 0, const int y = 0, const int currentLifeCycle = 0);
+	void breed() override;
+	char getDescriptionChar() const override;
+	void onLifeCycleChanged() override;
+	void onMove(int newX, int newY, int oldX, int oldY) override;
+	void doEventLoop(char type) override;
+
+	void randomMove();
+
+	static void addDoodlebug();
 };

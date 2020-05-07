@@ -5,9 +5,12 @@
 
 #include "Game.h"
 
+#include <set>
+
 using std::vector;
 using std::cout;
 using std::endl;
+using std::set;
 
 Game* Game::instance = nullptr;
 
@@ -44,12 +47,17 @@ void Game::draw() const {
 }
 
 void Game::doEventLoop() {
+	visitSet.clear();
+	
 	for (auto type : MapConfig::EventLoopTypeList) {
 		for (int y = 0; y < map->line; ++y) {
 			for (int x = 0; x < map->col; ++x) {
-				auto bug = map->getBug(x, y);
-				if (bug != nullptr)
+				Bug* bug = map->getBug(x, y);
+				
+				if (bug != nullptr && visitSet.find(bug) == visitSet.end()) {
+					visitSet.insert(bug);
 					bug->doEventLoop(type);
+				}
 			}
 		}
 	}

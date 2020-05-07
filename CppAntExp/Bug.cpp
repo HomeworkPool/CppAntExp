@@ -4,6 +4,24 @@ Bug::Bug(const int x, const int y, const int maxLifeCycle, const int currentLife
 	: x(x), y(y), maxLifeCycle(maxLifeCycle), currentLifeCycle(currentLifeCycle) {
 }
 
+Bug::~Bug() = default;
+
+int Bug::getX() const {
+	return x;
+}
+
+int Bug::getY() const {
+	return y;
+}
+
+void Bug::setX(const int x) {
+	this->x = x;
+}
+
+void Bug::setY(const int y) {
+	this->y = y;
+}
+
 void Bug::move(int x, int y) {
 	int oldX = this->x;
 	int oldY = this->y;

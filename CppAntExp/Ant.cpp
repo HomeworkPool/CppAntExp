@@ -27,9 +27,9 @@ void Ant::breed() {
 }
 
 void Ant::breedImpl(int x, int y) {
-	MapConfig* const instance = MapConfig::getInstance();
-	instance->addBug(new Ant());
+	addAnt(x, y);
 	isLastBreedSuccess = true;
+	addLifeCycle();
 }
 
 
@@ -51,7 +51,7 @@ void Ant::doEventLoop(char type) {
 	if (type == 'O') {
 		randomMove();
 
-		if (!isLastBreedSuccess)
+		if (!isLastBreedSuccess && currentLifeCycle == 0)
 			breed();
 		else
 			addLifeCycle();
@@ -89,6 +89,6 @@ void Ant::randomMove() {
 	}
 }
 
-void Ant::addAnt() {
-	MapConfig::getInstance()->addBug(new Ant());
+void Ant::addAnt(int x, int y) {
+	MapConfig::getInstance()->addBug(new Ant(x, y, 0));
 }

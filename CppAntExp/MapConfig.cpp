@@ -24,6 +24,15 @@ void MapConfig::setBug(Bug* bug, const int x, const int y) {
 	bugs[this->line * y + x] = bug;
 }
 
+void MapConfig::removeBug(const int x, const int y) {
+	Bug* bug = getBug(x, y);
+	
+	if (bug != nullptr) {
+		delete bug;
+		setBug(nullptr, x, y);
+	}
+}
+
 Bug* MapConfig::getBug(const int x, const int y) const {
 	return bugs[this->line * y + x];
 }
@@ -32,11 +41,13 @@ void MapConfig::addBug(Bug* bug) {
 	bool spawned = false;
 
 	while (!spawned) {
-		int x = rand() % col;
-		int y = rand() % line;
+		int x = bug->getX() < 0 ? rand() % col : bug->getX();
+		int y = bug->getY() < 0 ? rand() % line : bug->getY();
 
 		if (getBug(x, y) == nullptr) {
 			setBug(bug, x, y);
+			bug->setX(x);
+			bug->setY(y);
 			spawned = true;
 		}
 	}
