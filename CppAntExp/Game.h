@@ -20,12 +20,18 @@ private:
 	~MapConfig();
 
 public:
+	static vector<char> EventLoopTypeList;
+	
 	MapConfig(const MapConfig& target) = delete;
 	friend class Game;
 	void setBug(Bug* bug, const int x, const int y);
 	Bug* getBug(const int x, const int y) const;
+	void addBug(Bug* bug);
 	static void createInstance(const int line, const int col);
 	static MapConfig* getInstance();
+
+	int getLine() const;
+	int getCol() const;
 };
 
 
@@ -45,7 +51,7 @@ public:
 };
 
 class Bug {
-private:
+protected:
 	int x;
 	int y;
 	int currentLifeCycle;
@@ -57,13 +63,30 @@ public:
 	static const int DIRECTION_LEFT = 2;
 	static const int DIRECTION_RIGHT = 3;
 
+	Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0);
+
 	virtual void breed() = 0;
 	virtual void onLifeCycleChanged() = 0;
 	virtual void onMove(int newX, int newY, int oldX, int oldY) = 0;
-	virtual void doEventLoop() = 0;
+	virtual void doEventLoop(char type) = 0;
 	virtual char getDescriptionChar() const = 0;
 
-	Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0, const int randomSeed = 77);
 	void move(int x, int y);
 	void addLifeCycle();
+};
+
+class Ant : public Bug {
+private:
+
+public:
+	Ant(const int x = 0, const int y = 0, const int maxLifeCycle = 100, const int currentLifeCycle = 0);
+	void breed() override;
+	char getDescriptionChar() const override;
+	void onLifeCycleChanged() override;
+	void onMove(int newX, int newY, int oldX, int oldY) override;
+	void doEventLoop(char type) override;
+
+	void randomMove();
+
+	static void addAnt();
 };

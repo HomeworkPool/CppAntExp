@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Bug::Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0, const int randomSeed = 77)
+Bug::Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle)
 	: x(x), y(y), maxLifeCycle(maxLifeCycle), currentLifeCycle(currentLifeCycle) {
 }
 
@@ -10,6 +10,10 @@ void Bug::move(int x, int y) {
 
 	this->x = x;
 	this->y = y;
+
+	MapConfig* map = MapConfig::getInstance();
+	map->setBug(nullptr, oldX, oldY);
+	map->setBug(this, x, y);
 
 	onMove(x, y, oldX, oldY);
 }

@@ -139,12 +139,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ant.cpp" />
+    <ClCompile Include="Bug.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bug.cpp" />
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

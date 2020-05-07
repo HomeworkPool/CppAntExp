@@ -44,6 +44,16 @@ void Game::draw() const {
 }
 
 void Game::doEventLoop() {
+	for (auto type : MapConfig::EventLoopTypeList) {
+		for (int y = 0; y < map->line; ++y) {
+			for (int x = 0; x < map->col; ++x) {
+				auto bug = map->getBug(x, y);
+				if (bug != nullptr)
+					bug->doEventLoop(type);
+			}
+		}
+	}
+	
 	system("cls");
 	draw();
 }
