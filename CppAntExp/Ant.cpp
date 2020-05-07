@@ -9,18 +9,38 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-Ant::Ant(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle)
-	: Bug(x, y, maxLifeCycle, currentLifeCycle) {
+Ant::Ant(const int x, const int y, const int currentLifeCycle)
+	: Bug(x, y, 3, currentLifeCycle) {
 }
 
 void Ant::breed() {
+	MapConfig* const instance = MapConfig::getInstance();
+	
+	if (y > 0 && instance->getBug(x, y - 1) == nullptr)
+		breedImpl(x, y - 1);
+	if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) == nullptr)
+		breedImpl(x, y + 1);
+	if (x > 0 && instance->getBug(x - 1, y) == nullptr)
+		breedImpl(x - 1, y);
+	if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) == nullptr)
+		breedImpl(x + 1, y);
 }
 
+void Ant::breedImpl(int x, int y) {
+	MapConfig* const instance = MapConfig::getInstance();
+	instance->addBug(new Ant());
+	isLastBreedSuccess = true;
+}
+
+
 char Ant::getDescriptionChar() const {
-	return 'o';
+	return 'O';
 }
 
 void Ant::onLifeCycleChanged() {
+	if (currentLifeCycle == 0) {
+		breed();
+	}
 }
 
 void Ant::onMove(int newX, int newY, int oldX, int oldY) {
@@ -28,8 +48,13 @@ void Ant::onMove(int newX, int newY, int oldX, int oldY) {
 }
 
 void Ant::doEventLoop(char type) {
-	if (type == 'o') {
+	if (type == 'O') {
 		randomMove();
+
+		if (!isLastBreedSuccess)
+			breed();
+		else
+			addLifeCycle();
 	}
 }
 

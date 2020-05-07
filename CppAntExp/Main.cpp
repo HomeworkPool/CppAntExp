@@ -1,8 +1,11 @@
+#include <ctime>
+
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
 	Game* game = Game::getInstance();
 	MapConfig* mapConfig = MapConfig::getInstance();
+	srand((unsigned int)(time(NULL)));
 
 	for (int i = 0; i < 100; ++i) {
 		Ant::addAnt();
@@ -14,6 +17,6 @@ int main(int argc, char* argv[]) {
 
 	while (true) {
 		game->doEventLoop();
-		getchar();
+		//getchar();
 	}
 }

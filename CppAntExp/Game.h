@@ -77,9 +77,10 @@ public:
 
 class Ant : public Bug {
 private:
-
+	bool isLastBreedSuccess = true;
+	void breedImpl(int x, int y);
 public:
-	Ant(const int x = 0, const int y = 0, const int maxLifeCycle = 100, const int currentLifeCycle = 0);
+	Ant(const int x = 0, const int y = 0, const int currentLifeCycle = 0);
 	void breed() override;
 	char getDescriptionChar() const override;
 	void onLifeCycleChanged() override;
