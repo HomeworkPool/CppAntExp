@@ -15,6 +15,9 @@ int main(int argc, char* argv[]) {
 		
 	}
 
+	game->draw();
+	getchar();
+
 	while (true) {
 		game->doEventLoop();
 		getchar();

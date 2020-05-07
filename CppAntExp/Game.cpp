@@ -47,9 +47,9 @@ void Game::draw() const {
 }
 
 void Game::doEventLoop() {
-	visitSet.clear();
-	
 	for (auto type : MapConfig::EventLoopTypeList) {
+		visitSet.clear();
+		
 		for (int y = 0; y < map->line; ++y) {
 			for (int x = 0; x < map->col; ++x) {
 				Bug* bug = map->getBug(x, y);

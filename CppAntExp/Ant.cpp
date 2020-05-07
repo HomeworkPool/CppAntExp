@@ -10,7 +10,7 @@ using std::cout;
 using std::endl;
 
 Ant::Ant(const int x, const int y, const int currentLifeCycle)
-	: Bug(x, y, 3, currentLifeCycle) {
+	: Bug(x, y, 4, currentLifeCycle) {
 }
 
 void Ant::breed() {
