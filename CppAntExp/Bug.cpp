@@ -36,6 +36,37 @@ void Bug::move(int x, int y) {
 	onMove(x, y, oldX, oldY);
 }
 
+void Bug::randomMove() {
+	int direction = rand() % 4;
+	MapConfig* const instance = MapConfig::getInstance();
+
+	switch (direction) {
+	case DIRECTION_UP:
+		if (y > 0 && instance->getBug(x, y - 1) == nullptr)
+			move(x, y - 1);
+		break;
+
+	case DIRECTION_DOWN:
+		if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) == nullptr)
+			move(x, y + 1);
+		break;
+
+	case DIRECTION_LEFT:
+		if (x > 0 && instance->getBug(x - 1, y) == nullptr)
+			move(x - 1, y);
+		break;
+
+	case DIRECTION_RIGHT:
+		if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) == nullptr)
+			move(x + 1, y);
+		break;
+
+	default:
+		throw std::invalid_argument("Unexpected direction");
+		break;
+	}
+}
+
 void Bug::addLifeCycle() {
 	currentLifeCycle = (currentLifeCycle + 1) % maxLifeCycle;
 	onLifeCycleChanged();

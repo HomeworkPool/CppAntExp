@@ -10,7 +10,7 @@ using std::cout;
 using std::endl;
 
 MapConfig* MapConfig::instance = nullptr;
-vector<char> MapConfig::EventLoopTypeList = vector<char>{ 'x', 'O' };
+vector<char> MapConfig::EventLoopTypeList = vector<char>{ 'X', 'O' };
 
 MapConfig::MapConfig(const int line, const int col) : line(line), col(col), bugs(vector<Bug*>(line* col, nullptr)) {
 }

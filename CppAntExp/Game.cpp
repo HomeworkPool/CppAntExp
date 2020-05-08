@@ -2,10 +2,9 @@
 #include <random>
 #include <stdexcept>
 #include <vector>
+#include <set>
 
 #include "Game.h"
-
-#include <set>
 
 using std::vector;
 using std::cout;

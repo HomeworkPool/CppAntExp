@@ -13,16 +13,18 @@ Ant::Ant(const int x, const int y, const int currentLifeCycle)
 	: Bug(x, y, 4, currentLifeCycle) {
 }
 
+Ant::~Ant() = default;
+
 void Ant::breed() {
 	MapConfig* const instance = MapConfig::getInstance();
 	
 	if (y > 0 && instance->getBug(x, y - 1) == nullptr)
 		breedImpl(x, y - 1);
-	if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) == nullptr)
+	else if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) == nullptr)
 		breedImpl(x, y + 1);
-	if (x > 0 && instance->getBug(x - 1, y) == nullptr)
+	else if (x > 0 && instance->getBug(x - 1, y) == nullptr)
 		breedImpl(x - 1, y);
-	if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) == nullptr)
+	else if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) == nullptr)
 		breedImpl(x + 1, y);
 }
 
@@ -55,37 +57,6 @@ void Ant::doEventLoop(char type) {
 			breed();
 		else
 			addLifeCycle();
-	}
-}
-
-void Ant::randomMove() {
-	int direction = rand() % 4;
-	MapConfig* const instance = MapConfig::getInstance();
-
-	switch (direction) {
-		case DIRECTION_UP:
-			if (y > 0 && instance->getBug(x, y - 1) == nullptr)
-				move(x, y - 1);
-			break;
-
-		case DIRECTION_DOWN:
-			if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) == nullptr)
-				move(x, y + 1);
-			break;
-
-		case DIRECTION_LEFT:
-			if (x > 0 && instance->getBug(x - 1, y) == nullptr)
-				move(x - 1, y);
-			break;
-
-		case DIRECTION_RIGHT:
-			if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) == nullptr)
-				move(x + 1, y);
-			break;
-
-		default:
-			throw std::invalid_argument("Unexpected direction");
-			break;
 	}
 }
 

@@ -82,6 +82,7 @@ public:
 	void setY(const int y);
 
 	void move(int x, int y);
+	void randomMove();
 	void addLifeCycle();
 };
 
@@ -89,15 +90,16 @@ class Ant : public Bug {
 private:
 	bool isLastBreedSuccess = true;
 	void breedImpl(int x, int y);
-public:
 	Ant(const int x = 0, const int y = 0, const int currentLifeCycle = 0);
+	virtual ~Ant();
+	
+public:
+
 	void breed() override;
 	char getDescriptionChar() const override;
 	void onLifeCycleChanged() override;
 	void onMove(int newX, int newY, int oldX, int oldY) override;
 	void doEventLoop(char type) override;
-
-	void randomMove();
 
 	static void addAnt(int x = -1, int y = -1);
 };
@@ -105,18 +107,23 @@ public:
 class Doodlebug : public Bug {
 private:
 	bool isLastBreedSuccess = true;
+	int hunger;
 	void breedImpl(int x, int y);
-	void killAntImpl(int x, int y);
+	void killImpl(int x, int y);
+	Doodlebug(const int x = 0, const int y = 0, const int currentLifeCycle = 0);
+	virtual ~Doodlebug();
 	
 public:
-	Doodlebug(const int x = 0, const int y = 0, const int currentLifeCycle = 0);
+	static const int MAX_HUNGER = 4;
+
 	void breed() override;
 	char getDescriptionChar() const override;
 	void onLifeCycleChanged() override;
 	void onMove(int newX, int newY, int oldX, int oldY) override;
 	void doEventLoop(char type) override;
+	void setHungerToMax();
 
-	void randomMove();
+	void tryKillAndRandomMove();
 
-	static void addDoodlebug();
+	static void addDoodlebug(int x = -1, int y = -1);
 };

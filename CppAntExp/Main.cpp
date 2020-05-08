@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	for (int i = 0; i < 5; ++i) {
-		
+		Doodlebug::addDoodlebug();
 	}
 
 	game->draw();
@@ -20,6 +20,5 @@ int main(int argc, char* argv[]) {
 
 	while (true) {
 		game->doEventLoop();
-		getchar();
 	}
 }

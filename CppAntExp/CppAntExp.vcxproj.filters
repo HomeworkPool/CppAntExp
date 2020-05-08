@@ -30,6 +30,9 @@
     <ClCompile Include="Bug.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Doodlebug.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
