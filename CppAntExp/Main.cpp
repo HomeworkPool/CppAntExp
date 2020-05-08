@@ -17,10 +17,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	game->draw();
+	std::cout << std::endl << "This is the initial condition. Press Enter to start." << std::endl;
 	getchar();
 
 	while (true) {
 		game->doEventLoop();
-		//Sleep(100);
+		std::cout << std::endl << "Press Enter to continue" << std::endl;
+		getchar();
 	}
 }
