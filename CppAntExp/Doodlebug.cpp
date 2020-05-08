@@ -44,10 +44,6 @@ void Doodlebug::onLifeCycleChanged() {
 	}
 }
 
-void Doodlebug::onMove(int newX, int newY, int oldX, int oldY) {
-	
-}
-
 void Doodlebug::doEventLoop(char type) {
 	if (type == 'X') {
 		hunger--;

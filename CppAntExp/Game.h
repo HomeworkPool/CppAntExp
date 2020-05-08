@@ -71,9 +71,10 @@ public:
 
 	virtual void breed() = 0;
 	virtual void onLifeCycleChanged() = 0;
-	virtual void onMove(int newX, int newY, int oldX, int oldY) = 0;
 	virtual void doEventLoop(char type) = 0;
 	virtual char getDescriptionChar() const = 0;
+	virtual void move(int x, int y);
+	virtual void randomMove();
 
 	int getX() const;
 	int getY() const;
@@ -81,12 +82,10 @@ public:
 	void setX(const int x);
 	void setY(const int y);
 
-	void move(int x, int y);
-	void randomMove();
 	void addLifeCycle();
 };
 
-class Ant : public Organism {
+class Ant final : public Organism {
 private:
 	bool isLastBreedSuccess = true;
 	void breedImpl(int x, int y);
@@ -98,13 +97,12 @@ public:
 	void breed() override;
 	char getDescriptionChar() const override;
 	void onLifeCycleChanged() override;
-	void onMove(int newX, int newY, int oldX, int oldY) override;
 	void doEventLoop(char type) override;
 
 	static void addAnt(int x = -1, int y = -1);
 };
 
-class Doodlebug : public Organism {
+class Doodlebug final : public Organism {
 private:
 	bool isLastBreedSuccess = true;
 	int hunger;
@@ -119,7 +117,6 @@ public:
 	void breed() override;
 	char getDescriptionChar() const override;
 	void onLifeCycleChanged() override;
-	void onMove(int newX, int newY, int oldX, int oldY) override;
 	void doEventLoop(char type) override;
 	void setHungerToMax();
 

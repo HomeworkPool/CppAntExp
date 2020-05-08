@@ -45,10 +45,6 @@ void Ant::onLifeCycleChanged() {
 	}
 }
 
-void Ant::onMove(int newX, int newY, int oldX, int oldY) {
-	
-}
-
 void Ant::doEventLoop(char type) {
 	if (type == 'O') {
 		randomMove();

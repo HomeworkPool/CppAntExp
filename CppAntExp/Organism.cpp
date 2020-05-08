@@ -32,8 +32,6 @@ void Organism::move(int x, int y) {
 	MapConfig* map = MapConfig::getInstance();
 	map->setBug(nullptr, oldX, oldY);
 	map->setBug(this, x, y);
-
-	onMove(x, y, oldX, oldY);
 }
 
 void Organism::randomMove() {
