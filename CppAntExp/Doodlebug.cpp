@@ -39,7 +39,9 @@ char Doodlebug::getDescriptionChar() const {
 }
 
 void Doodlebug::onLifeCycleChanged() {
-	
+	if (currentLifeCycle == 0) {
+		breed();
+	}
 }
 
 void Doodlebug::onMove(int newX, int newY, int oldX, int oldY) {
@@ -70,13 +72,13 @@ void Doodlebug::setHungerToMax() {
 void Doodlebug::tryKillAndRandomMove() {
 	MapConfig* const instance = MapConfig::getInstance();
 
-	if (y > 0 && instance->getBug(x, y - 1) != nullptr)
+	if (y > 0 && instance->getBug(x, y - 1) != nullptr && instance->getBug(x, y - 1)->getDescriptionChar() == 'O')
 		killImpl(x, y - 1);
-	else if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) != nullptr)
+	else if (y < instance->getLine() - 1 && instance->getBug(x, y + 1) != nullptr && instance->getBug(x, y + 1)->getDescriptionChar() == 'O')
 		killImpl(x, y + 1);
-	else if (x > 0 && instance->getBug(x - 1, y) == nullptr)
+	else if (x > 0 && instance->getBug(x - 1, y) != nullptr && instance->getBug(x - 1, y)->getDescriptionChar() == 'O')
 		killImpl(x - 1, y);
-	else if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) != nullptr)
+	else if (x < instance->getCol() - 1 && instance->getBug(x + 1, y) != nullptr && instance->getBug(x + 1, y)->getDescriptionChar() == 'O')
 		killImpl(x + 1, y);
 	else
 		randomMove();

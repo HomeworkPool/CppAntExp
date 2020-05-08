@@ -1,4 +1,5 @@
 #include <ctime>
+#include <windows.h>
 
 #include "Game.h"
 
@@ -20,5 +21,6 @@ int main(int argc, char* argv[]) {
 
 	while (true) {
 		game->doEventLoop();
+		//Sleep(100);
 	}
 }
