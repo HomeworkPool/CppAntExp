@@ -27,10 +27,10 @@
     <ClCompile Include="Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Bug.cpp">
+    <ClCompile Include="Doodlebug.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Doodlebug.cpp">
+    <ClCompile Include="Organism.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

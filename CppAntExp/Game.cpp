@@ -31,7 +31,7 @@ Game* Game::getInstance() {
 void Game::draw() const {
 	for (int y = 0; y < map->line; ++y) {
 		for (int x = 0; x < map->col; ++x) {
-			Bug* bug = map->getBug(x, y);
+			Organism* bug = map->getBug(x, y);
 
 			if (bug != nullptr) {
 				cout << bug->getDescriptionChar();
@@ -51,7 +51,7 @@ void Game::doEventLoop() {
 		
 		for (int y = 0; y < map->line; ++y) {
 			for (int x = 0; x < map->col; ++x) {
-				Bug* bug = map->getBug(x, y);
+				Organism* bug = map->getBug(x, y);
 				
 				if (bug != nullptr && visitSet.find(bug) == visitSet.end()) {
 					visitSet.insert(bug);

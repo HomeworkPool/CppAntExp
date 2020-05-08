@@ -15,7 +15,7 @@ void Doodlebug::killImpl(int x, int y) {
 }
 
 Doodlebug::Doodlebug(const int x, const int y, const int currentLifeCycle)
-	: Bug(x, y, 9, currentLifeCycle), hunger(MAX_HUNGER) {
+	: Organism(x, y, 9, currentLifeCycle), hunger(MAX_HUNGER) {
 	
 }
 

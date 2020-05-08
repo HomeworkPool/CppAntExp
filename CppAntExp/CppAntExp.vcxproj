@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ant.cpp" />
-    <ClCompile Include="Bug.cpp" />
+    <ClCompile Include="Organism.cpp" />
     <ClCompile Include="Doodlebug.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />

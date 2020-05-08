@@ -1,28 +1,28 @@
 #include "Game.h"
 
-Bug::Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle)
+Organism::Organism(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle)
 	: x(x), y(y), maxLifeCycle(maxLifeCycle), currentLifeCycle(currentLifeCycle) {
 }
 
-Bug::~Bug() = default;
+Organism::~Organism() = default;
 
-int Bug::getX() const {
+int Organism::getX() const {
 	return x;
 }
 
-int Bug::getY() const {
+int Organism::getY() const {
 	return y;
 }
 
-void Bug::setX(const int x) {
+void Organism::setX(const int x) {
 	this->x = x;
 }
 
-void Bug::setY(const int y) {
+void Organism::setY(const int y) {
 	this->y = y;
 }
 
-void Bug::move(int x, int y) {
+void Organism::move(int x, int y) {
 	int oldX = this->x;
 	int oldY = this->y;
 
@@ -36,7 +36,7 @@ void Bug::move(int x, int y) {
 	onMove(x, y, oldX, oldY);
 }
 
-void Bug::randomMove() {
+void Organism::randomMove() {
 	int direction = rand() % 4;
 	MapConfig* const instance = MapConfig::getInstance();
 
@@ -67,7 +67,7 @@ void Bug::randomMove() {
 	}
 }
 
-void Bug::addLifeCycle() {
+void Organism::addLifeCycle() {
 	currentLifeCycle = (currentLifeCycle + 1) % maxLifeCycle;
 	onLifeCycleChanged();
 }

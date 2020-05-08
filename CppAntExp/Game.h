@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 
-class Bug;
+class Organism;
 using std::vector;
 using std::cout;
 using std::endl;
@@ -15,7 +15,7 @@ class MapConfig {
 private:
 	const int line;
 	const int col;
-	vector<Bug*> bugs;
+	vector<Organism*> bugs;
 	static MapConfig* instance;
 	MapConfig(const int line, const int col);
 	~MapConfig();
@@ -25,10 +25,10 @@ public:
 	
 	MapConfig(const MapConfig& target) = delete;
 	friend class Game;
-	void setBug(Bug* bug, const int x, const int y);
+	void setBug(Organism* bug, const int x, const int y);
 	void removeBug(const int x, const int y);
-	Bug* getBug(const int x, const int y) const;
-	void addBug(Bug* bug);
+	Organism* getBug(const int x, const int y) const;
+	void addBug(Organism* bug);
 	static void createInstance(const int line, const int col);
 	static MapConfig* getInstance();
 
@@ -41,7 +41,7 @@ class Game {
 private:
 	static Game* instance;
 	MapConfig* map;
-	std::set<Bug*> visitSet;
+	std::set<Organism*> visitSet;
 
 	Game();
 	~Game();
@@ -53,7 +53,7 @@ public:
 	void doEventLoop();
 };
 
-class Bug {
+class Organism {
 protected:
 	int x;
 	int y;
@@ -66,8 +66,8 @@ public:
 	static const int DIRECTION_LEFT = 2;
 	static const int DIRECTION_RIGHT = 3;
 
-	Bug(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0);
-	virtual ~Bug();
+	Organism(const int x, const int y, const int maxLifeCycle, const int currentLifeCycle = 0);
+	virtual ~Organism();
 
 	virtual void breed() = 0;
 	virtual void onLifeCycleChanged() = 0;
@@ -86,7 +86,7 @@ public:
 	void addLifeCycle();
 };
 
-class Ant : public Bug {
+class Ant : public Organism {
 private:
 	bool isLastBreedSuccess = true;
 	void breedImpl(int x, int y);
@@ -104,7 +104,7 @@ public:
 	static void addAnt(int x = -1, int y = -1);
 };
 
-class Doodlebug : public Bug {
+class Doodlebug : public Organism {
 private:
 	bool isLastBreedSuccess = true;
 	int hunger;

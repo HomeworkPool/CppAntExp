@@ -12,7 +12,7 @@ using std::endl;
 MapConfig* MapConfig::instance = nullptr;
 vector<char> MapConfig::EventLoopTypeList = vector<char>{ 'X', 'O' };
 
-MapConfig::MapConfig(const int line, const int col) : line(line), col(col), bugs(vector<Bug*>(line* col, nullptr)) {
+MapConfig::MapConfig(const int line, const int col) : line(line), col(col), bugs(vector<Organism*>(line* col, nullptr)) {
 }
 
 MapConfig::~MapConfig() {
@@ -20,12 +20,12 @@ MapConfig::~MapConfig() {
 	instance = nullptr;
 }
 
-void MapConfig::setBug(Bug* bug, const int x, const int y) {
+void MapConfig::setBug(Organism* bug, const int x, const int y) {
 	bugs[this->line * y + x] = bug;
 }
 
 void MapConfig::removeBug(const int x, const int y) {
-	Bug* bug = getBug(x, y);
+	Organism* bug = getBug(x, y);
 	
 	if (bug != nullptr) {
 		delete bug;
@@ -33,11 +33,11 @@ void MapConfig::removeBug(const int x, const int y) {
 	}
 }
 
-Bug* MapConfig::getBug(const int x, const int y) const {
+Organism* MapConfig::getBug(const int x, const int y) const {
 	return bugs[this->line * y + x];
 }
 
-void MapConfig::addBug(Bug* bug) {
+void MapConfig::addBug(Organism* bug) {
 	bool spawned = false;
 
 	while (!spawned) {
